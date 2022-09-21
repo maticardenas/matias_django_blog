@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     author = models.ForeignKey(
-        "auth.User"
+        "auth.User", on_delete=models.CASCADE
     )  # linking the user as author, as website is only intended to be used by me
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -28,7 +28,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey("blog.Post", related_name="comments")
+    post = models.ForeignKey("blog.Post", related_name="comments", on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now())

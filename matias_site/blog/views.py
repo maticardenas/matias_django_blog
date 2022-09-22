@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils import timezone
-from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, DeleteView
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from forms import PostForm
-from models import Post
+from django.utils import timezone
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  TemplateView, UpdateView)
+from forms import CommentForm, PostForm
+from models import Comment, Post
 
 
 class AboutView(TemplateView):
@@ -48,3 +51,49 @@ class DraftListView(ListView, LoginRequiredMixin):
 
     def get_queryset(self):
         return Post.filter(publish_date__isnull=True).order_by("created_date")
+
+
+################################################################################
+
+
+@login_required
+def add_comment_to_post(request: "Request", pk: int) -> "Response":
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+
+            return redirect("post_detail", pk=post.pk)
+    else:
+        form = CommentForm()
+
+    return render(request, "blog/comment_form.html", {"form": form})
+
+
+@login_required
+def approve_comment(request: "Request", pk: int) -> "Response":
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+
+    return redirect("post_detail", pk=comment.post.pk)
+
+
+@login_required
+def remove_comment(request: "Request", pk: int) -> "Response":
+    comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
+    comment.delete()
+
+    return redirect("post_detail", pk=post_pk)
+
+
+@login_required
+def publish_post(request: "Request", pk: int) -> "Response":
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect("post_detail", pk=post.pk)

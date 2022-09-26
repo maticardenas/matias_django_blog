@@ -7,14 +7,17 @@
         <h3>(Must be a SuperUser, please check with the site admin)</h3>
 
         {% if form.errors %}
-            <p>Your username and password didn't match! PLease try again.</p>
+            <p>Your username and password didn't match! Please try again.</p>
         {% endif %}
 
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-            {% form.as_p %}
+
+            {{ form.as_p }}
+
             <input type="submit" class="btn btn-primary" value="Login">
             <input type="hidden" name="next" value="{{ next }}">
+
         </form>
     </div>
 

@@ -7,11 +7,11 @@
     <title>Blog</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
     <!-- Medium Style Editor -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
@@ -23,37 +23,42 @@
 </head>
 <body class="loader">
     <!-- NAVBAR -->
-    <nav class="navbar navbar-default techfont custom-navbar">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a class="navbar-brand bigbrand" href="{% url 'post_list' %}">My Blog</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="navbar-brand nav-link" href="{% url 'post_list' %}">My Blog</a>
                 </li>
-                <li>
-                    <a href="{% url 'about' %}">About</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
-                <li>
-                    <a href="https://github.com/maticardenas">GitHub</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/maticardenas">GitHub</a>
                 </li>
-                <li>
-                    <a href="https://www.linkedin.com/in/mat%C3%ADas-c%C3%A1rdenas-05421b26/">LinkedIn</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://www.linkedin.com/in/mat%C3%ADas-c%C3%A1rdenas-05421b26/">LinkedIn</a>
                 </li>
             </ul>
+         </div>
 
-            <ul class="nav navbar-nav navbar-right">
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+              <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'post_new' %}">New Post</a>
-                        <a href="{% url 'post_draft_list' %}">Drafts</a>
-                        <a href="{% url 'logouts' %}">Log Out</a>
-
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
                     </li>
-                    <li>
-                        <a>Welcome: {{ user.username }}</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link">Welcome: {{ user.username }}</a>
                     </li>
                 {% else %}
-                    <li>
-                        <a class="nav navbar-right" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'login' %}">Login <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M10.5 5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm.061 3.073a4 4 0 10-5.123 0 6.004 6.004 0 00-3.431 5.142.75.75 0 001.498.07 4.5 4.5 0 018.99 0 .75.75 0 101.498-.07 6.005 6.005 0 00-3.432-5.142z"></path></svg></a>
                     </li>
                 {% endif %}
             </ul>
@@ -72,7 +77,5 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
-from forms import CommentForm, PostForm
-from models import Comment, Post
+from blog.forms import CommentForm, PostForm
+from blog.models import Comment, Post
 
 
 class AboutView(TemplateView):
@@ -20,7 +20,7 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
-    models = Post
+    model = Post
 
 
 class CreatePostView(CreateView, LoginRequiredMixin):
@@ -49,7 +49,7 @@ class DraftListView(ListView, LoginRequiredMixin):
     model = Post
 
     def get_queryset(self):
-        return Post.filter(publish_date__isnull=True).order_by("created_date")
+        return Post.objects.filter(published_date__isnull=True).order_by("create_date")
 
 
 ################################################################################

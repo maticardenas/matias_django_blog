@@ -1,8 +1,10 @@
 {% extends "blog/base.html" %}
+
+
 {% block content %}
     <h1>Post</h1>
 
-    <form class="post-form dropdown" method="POST">
+    <form class="post-form" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
 
@@ -10,6 +12,13 @@
     </form>
 
     <script>
-        var editor = new MediumEditor(".editable");
+        tinymce.init({
+            mode: "textareas",
+            theme: "silver",
+            plugins: "spellchecker,directionality,paste,searchreplace,lists,link,image,media,emoticons",
+            paste_data_images: true,
+            toolbar: "undo redo | styleselect | bold underline italic strikethrough | blockquote | alignleft aligncenter alignright alignjustify | link image media | numlist bullist | emoticons",
+        });
+        {#var editor = new MediumEditor(".editable");#}
     </script>
-{% endblock %}
+{% endblock %}`

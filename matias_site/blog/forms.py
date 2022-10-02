@@ -1,8 +1,13 @@
+import tinymce
 from django import forms
+from tinymce.widgets import TinyMCE
+
 from blog.models import Comment, Post
 
 
 class PostForm(forms.ModelForm):
+    text = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+
     class Meta:
         model = Post
         fields = (
@@ -16,7 +21,6 @@ class PostForm(forms.ModelForm):
         widgets = {
             "author": forms.Select(attrs={"class": "btn-group"}),
             "title": forms.TextInput(attrs={"class": "form-control"}),
-            "text": forms.Textarea(attrs={"class": "editable medium-editor-textarea postcontent"}),
         }
 
 

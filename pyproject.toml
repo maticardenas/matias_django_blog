@@ -10,6 +10,7 @@ Django = "^4.1.1"
 black = "^22.8.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
+django-tinymce = "^3.5.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -1,13 +1,10 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-{#    <h1 style="alignment: left;"></h1>#}
 
+{#<div>{{ post.title }}</div>#}
 
-<div>{{ post.title }}</div>
-
-<div class="shadow p-3 mb-5 bg-body rounded">            {{ post.text|safe|linebreaksbr }}
-        </div>
+<div class="shadow p-3 mb-5 bg-body rounded">{{ post.text|safe|linebreaksbr }}</div>
 
     {% if user.is_authenticated %}
         {% if post.published_date %}
@@ -51,8 +48,6 @@
                     <p class="card-text">{{ comment.text|safe|linebreaks }}</p>
                   </div>
              </div>
-
-
 
          {% endif %}
             {% empty %}

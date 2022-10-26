@@ -11,12 +11,16 @@ black = "^22.8.0"
 isort = "^5.10.1"
 flake8 = "^5.0.4"
 django-tinymce = "^3.5.0"
+psycopg2 = "^2.9.5"
 
 [tool.poetry.dev-dependencies]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
 
 [tool.black]
 line-length = 120

@@ -7,9 +7,9 @@ USER root
 RUN apt-get update \
 && apt-get install gcc -y \
 && apt-get clean \
-&& apt-get install cron -y \
 && apt-get install bash \
-&& apt-get install vim -y
+&& apt-get install vim -y \
+&& apt-get -y install libpq-dev gcc
 
 RUN pip install poetry
 
@@ -22,4 +22,4 @@ ENV PYTHONUNBUFFERED=1
 
 RUN poetry install
 
-CMD poetry run python /usr/matias_django_blog/matias_site/manage.py runserver 0.0.0.0:8000
+CMD /usr/matias_django_blog/cmd_script.sh

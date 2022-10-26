@@ -1,11 +1,18 @@
+from blog.forms import CommentForm, PostForm
+from blog.models import Comment, Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
-from blog.forms import CommentForm, PostForm
-from blog.models import Comment, Post
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
 
 
 class AboutView(TemplateView):

@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  matias_site:
+    build: .
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/usr/matias_django_blog
+    depends_on:
+      - matias_site_db
+
+  matias_site_db:
+    image: postgres:11-alpine
+    expose:
+      - "5433"
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=matias_django_site
+      - POSTGRES_USER=matias_postgres
+      - POSTGRES_PASSWORD=supersecretpassword
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    command: -p 5433

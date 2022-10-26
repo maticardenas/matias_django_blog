@@ -1,12 +1,11 @@
 import tinymce
+from blog.models import Comment, Post
 from django import forms
 from tinymce.widgets import TinyMCE
 
-from blog.models import Comment, Post
-
 
 class PostForm(forms.ModelForm):
-    text = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
+    text = forms.CharField(widget=TinyMCE(attrs={"cols": 80, "rows": 30}))
 
     class Meta:
         model = Post

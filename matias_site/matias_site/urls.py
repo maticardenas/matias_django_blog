@@ -23,4 +23,5 @@ urlpatterns = [
     re_path(r"^accounts/login/$", views.LoginView.as_view(), name="login"),
     re_path(r"^accounts/logout/$", views.LogoutView.as_view(), name="logout", kwargs={"next_page": "/"}),
     re_path("^tinymce/", include("tinymce.urls")),
+    re_path("^api/", include("api.urls")),
 ]

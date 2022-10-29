@@ -3,7 +3,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"post", PostViewSet)
+router.register(r"post", PostViewSet, basename="post")
 
 app_name = "api"
 

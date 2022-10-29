@@ -1,5 +1,7 @@
 import os
 
+from django.contrib.auth import get_user_model
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "matias_site.settings")
 
 from pathlib import Path
@@ -27,3 +29,8 @@ def openapi_client_factory() -> Callable:
         return OpenAPIClient(schema_tester=schema_tester)
 
     return openapi_client
+
+
+@pytest.fixture
+def user():
+    return get_user_model().objects.create_user("test_user")

@@ -17,6 +17,15 @@ paths:
                 items:
                   $ref: '#/components/schemas/Post'
           description: ''
+        '403':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+          description: 'Forbidden'
       tags:
       - api
     post:
@@ -41,6 +50,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Post'
           description: ''
+        '403':
+          description: 'Forbidden'
       tags:
       - api
   /api/post/{id}/:

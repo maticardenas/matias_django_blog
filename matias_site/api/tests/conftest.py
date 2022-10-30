@@ -1,14 +1,18 @@
 import os
+from datetime import datetime
 
 from django.contrib.auth import get_user_model
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "matias_site.settings")
 
 from pathlib import Path
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
 import pytest
 from openapi_tester import SchemaTester
+
+if TYPE_CHECKING:
+    from rest_framework.authtoken.admin import User
 
 CURRENT_PATH = Path().absolute()
 
@@ -34,3 +38,14 @@ def openapi_client_factory() -> Callable:
 @pytest.fixture
 def user():
     return get_user_model().objects.create_user("test_user")
+
+
+@pytest.fixture
+def post(user: "User"):
+    from blog.models import Post
+
+    Post.objects.create(
+        author=user,
+        title="Test Post",
+        text="Test Text",
+    )

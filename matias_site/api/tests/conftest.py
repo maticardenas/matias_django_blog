@@ -48,4 +48,5 @@ def post(user: "User"):
         author=user,
         title="Test Post",
         text="Test Text",
+        create_date=datetime.strptime("31/12/2022 00:00:00", "%d/%m/%Y %H:%M:%S"),
     )

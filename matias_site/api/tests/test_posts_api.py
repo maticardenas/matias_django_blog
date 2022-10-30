@@ -31,19 +31,21 @@ def client(openapi_client_factory: Callable, schema_tester: SchemaTester) -> Ope
     return openapi_client_factory(schema_tester)
 
 
-@pytest.fixture
-def patched_date():
-    with freeze_time("31-12-2022 12:00:00"):
-        yield
-
-
 @pytest.mark.django_db
 def test_get_posts_with_data(client: OpenAPIClient, user: "User", post_api_url: str, post):
     client.force_authenticate(user=user)
     response = client.get(post_api_url)
 
     assert response.status_code == status.HTTP_200_OK
-    print(response.json())
+    assert response.json() == [
+        {
+            "author": 1,
+            "title": "Test Post",
+            "text": "Test Text",
+            "create_date": "2022-12-31T00:00:00Z",
+            "published_date": None,
+        }
+    ]
 
 
 @pytest.mark.django_db

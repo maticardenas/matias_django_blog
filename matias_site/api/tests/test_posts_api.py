@@ -3,7 +3,6 @@ from typing import TYPE_CHECKING, Callable
 
 import pytest as pytest
 from django.urls import reverse
-from freezegun import freeze_time
 from openapi_tester import OpenAPIClient, SchemaTester
 from rest_framework import status
 

@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - "8888:8888"
-    command: bash -c 'while !</dev/tcp/matias_site_db/5433; do sleep 1; done; ./start_server.sh'
+    command: bash -c 'while !</dev/tcp/matias_site_db/5434; do sleep 1; done; ./start_server.sh'
     volumes:
       - .:/usr/matias_django_blog
     depends_on:
@@ -14,13 +14,13 @@ services:
   matias_site_db:
     image: postgres:11-alpine
     expose:
-      - "5433"
+      - "5434"
     ports:
-      - "5433:5432"
+      - "5434:5432"
     environment:
       - POSTGRES_DB=matias_django_site
       - POSTGRES_USER=matias_postgres
       - POSTGRES_PASSWORD=supersecretpassword
     volumes:
       - ./data:/var/lib/postgresql/data
-    command: -p 5433
+    command: -p 5434

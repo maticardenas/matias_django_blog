@@ -28,7 +28,7 @@ def schema_tester_factory() -> Callable:
 @pytest.fixture
 def openapi_client_factory() -> Callable:
     def openapi_client(schema_tester: SchemaTester):
-        from openapi_tester.clients import OpenAPIClient
+        from openapi_tester.clients import `OpenAPIClient`
 
         return OpenAPIClient(schema_tester=schema_tester)
 

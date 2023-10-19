@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "blog",
     "tinymce",
     "rest_framework",
+    "posts",
+    "questions",
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,7 @@ DATABASES = {
         "USER": "matias_postgres",
         "PASSWORD": "supersecretpassword",
         "HOST": "matias_site_db",
-        "PORT": "5433",
+        "PORT": "5434",
     }
 }
 

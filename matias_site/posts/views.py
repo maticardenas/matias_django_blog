@@ -1,4 +1,4 @@
-from api.serializers import PostListSerializer, PostSerializer
+from posts.serializers import PostListSerializer, PostSerializer
 from blog.models import Post
 from django.shortcuts import render
 

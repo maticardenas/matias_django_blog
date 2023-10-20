@@ -4,7 +4,7 @@ services:
   matias_site:
     build: .
     ports:
-      - "80:80"
+      - "8888:8888"
     command: bash -c 'while !</dev/tcp/matias_site_db/5434; do sleep 1; done; ./start_server.sh'
     volumes:
       - .:/usr/matias_django_blog
@@ -19,4 +19,5 @@ services:
       - POSTGRES_PASSWORD=supersecretpassword
     volumes:
       - ./data:/var/lib/postgresql/data
-    command: -p 5434
+    command:
+      - -p 5434

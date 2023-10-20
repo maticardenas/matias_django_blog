@@ -4,7 +4,7 @@ services:
   matias_site:
     build: .
     ports:
-      - "8888:8888"
+      - "80:80"
     command: bash -c 'while !</dev/tcp/matias_site_db/5434; do sleep 1; done; ./start_server.sh'
     volumes:
       - .:/usr/matias_django_blog

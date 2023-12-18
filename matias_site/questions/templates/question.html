@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Form</title>
+
+</head>
+<body>
+
+    <form method="POST" action="{% url 'question' %}">
+    {% csrf_token %}
+    <p>{{ question_dict.question }}</p>
+    <img src="{{ question_dict.image }}" alt="Image">
+    <input type="text" name="answer">
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

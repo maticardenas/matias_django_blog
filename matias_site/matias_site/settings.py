@@ -14,7 +14,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = BASE_DIR / "blog" / "templates" / "blog"
+BLOG_TEMPLATES_DIR = BASE_DIR / "blog" / "templates" / "blog"
+CORE_TEMPLATES_DIR = BASE_DIR / "core" / "templates"
+QUESTIONS_TEMPLATES_DIR = BASE_DIR / "questions" / "templates"
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "posts",
     "questions",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -64,7 +67,9 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            TEMPLATE_DIR,
+            BLOG_TEMPLATES_DIR,
+            CORE_TEMPLATES_DIR,
+            QUESTIONS_TEMPLATES_DIR,
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -139,7 +144,11 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "questions/images"),
+]
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Where to redirect after logging in

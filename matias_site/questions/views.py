@@ -15,35 +15,55 @@ IMAGES_DIR = CURRENT_DIR / "images"
 # Create your views here.
 
 CODES = {
-    "Ema": "0912",
-    "David": "1303",
-    "Fede": "0777",
+    "Kun": "5656", #
+    "David": "3232", #
+    "Pollo": "4444",
+    "Pipi": "6262",
+    "Ulises": "7171",
+    "Pela": "7878",
 }
 
 CODE_ANSWERS = {
-    "Ema": 13,
-    "David": 15,
-    "Fede": 24,
+    "David": 52,
+    "Ulises": 49,
+    "Kun": 51,
+    "Pipi": 42,
+    "Pollo": 24,
+    "Pela": 25,
 }
 
 
 CODE_IMAGES = {
-    "Ema": "ema_code.jpg",
-    "Fede": "fede_code.jpg",
-    "David": "david_code.jpg",
+    "Kun": "kun_question.png", #
+    "David": "david_question.png", #
+    "Pollo": "pollo_question.png",
+    "Pipi": "pipi_question.png",
+    "Ulises": "ulises_question.png",
+    "Pela": "pela_question.png",
 }
 
 ANSWERS = {
-    "Ema": 14,
-    "David": 818,
-    "Fede": 2014,
+    "Kun": 2, # Palermo + Enzo
+    "David": 12, # Messi + Penaldo - Klose
+    "Pollo": 31, # Ronald + Klose - Garce
+    "Pipi": "pipi_answer.png",
+    "Ulises": "ulises_answer.png",
+    "Pela": "pela_answer.png",
 }
 
 IMAGES = {
-    "Ema": "ema.jpg",
-    "Fede": "fede.jpg",
-    "David": "david.jpg",
+    "Kun": "kun_answer.png", #
+    "David": "david_answer.png", #
+    "Pollo": "pollo_answer.png",
+    "Pipi": "pipi_answer.png",
+    "Ulises": "ulises_answer.png",
+    "Pela": "pela_answer.png",
 }
+
+
+
+def index(request):
+    return render(request, "colis_home.html")
 
 
 class CodeView(generics.CreateAPIView):

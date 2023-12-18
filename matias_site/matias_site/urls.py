@@ -18,12 +18,13 @@ from django.contrib.auth import views
 from django.urls import include, path, re_path
 
 urlpatterns = [
+    path("", include("core.urls"), name="core"),
     path("admin/", admin.site.urls),
-    path("", include("blog.urls")),
+    path("blog/", include("blog.urls"), name="blog"),
     re_path(r"^accounts/login/$", views.LoginView.as_view(), name="login"),
     re_path(r"^accounts/logout/$", views.LogoutView.as_view(), name="logout", kwargs={"next_page": "/"}),
     re_path("^tinymce/", include("tinymce.urls")),
     re_path("^api/posts/", include("posts.urls"), name="posts_api"),
-    re_path("^api/questions/", include("questions.urls"), name="questions_api"),
+    re_path("^colis/", include("questions.urls"), name="questions_api"),
 
 ]

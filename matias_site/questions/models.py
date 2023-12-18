@@ -4,9 +4,12 @@ from django.db import models
 
 
 class Names(models.TextChoices):
-    EMA = "Ema"
     DAVID = "David"
-    FEDE = "Fede"
+    KUN = "Kun"
+    POLLO = "Pollo"
+    PELA = "Pela"
+    PIPI = "Pipi"
+    ULISES = "Ulises"
 
 
 class Question(models.Model):

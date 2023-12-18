@@ -4,6 +4,7 @@ from questions import views
 app_name = "questions"
 
 urlpatterns = [
-    path("", views.QuestionView.as_view(), name="questions"),
+    path("questions/", views.QuestionView.as_view(), name="questions"),
+    path("", views.index, name="colis"),
     path("code/", views.CodeView.as_view(), name="code"),
 ]

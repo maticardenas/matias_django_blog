@@ -46,9 +46,9 @@ ANSWERS = {
     "Kun": 2, # Palermo + Enzo
     "David": 12, # Messi + Penaldo - Klose
     "Pollo": 31, # Ronald + Klose - Garce
-    "Pipi": "pipi_answer.png",
-    "Ulises": "ulises_answer.png",
-    "Pela": "pela_answer.png",
+    "Pipi": "marcos",
+    "Ulises": "marcos",
+    "Pela": "marcos",
 }
 
 IMAGES = {
@@ -87,6 +87,14 @@ class CodeView(generics.CreateAPIView):
 class QuestionView(generics.CreateAPIView):
     serializer_class = QuestionSerializer
 
+
+    def check_answer(self, data):
+        if data["name"] in ["Pipi", "Ulises"]:
+            return data["answer"].lower() == ANSWERS[data["name"]]
+        elif data["name"] in ["Pela"]:
+            return data["answer"].lower() in ["krkic", "krkić"]
+        else:
+            return int(data["answer"]) == int(ANSWERS[data["name"]])
     def create(self, requests, *args, **kwargs):
         serializer = self.get_serializer(data=requests.data)
         serializer.is_valid(raise_exception=True)
@@ -95,7 +103,7 @@ class QuestionView(generics.CreateAPIView):
         if int(data["code"]) != int(CODES[data["name"]]):
             return HttpResponse(f"Codigo incorrecto para {data['name']}", status=400, content_type="")
 
-        if int(data["answer"]) != int(ANSWERS[data["name"]]):
+        if not self.check_answer(data):
             return HttpResponse(f"Respuesta incorrecta para {data['name']}", status=400, content_type="")
 
         image = IMAGES[data["name"]]

@@ -33,15 +33,15 @@ h1{
 }
 
 
-.postdate{
-  text-align:center;
-}
+/*.postdate{*/
+/*  text-align:center;*/
+/*}*/
 
 .posttitle{
   font-family: "Didact Gothic";
   font-size: 3em;
-  text-align: center;
-  align-content: center;
+  /*text-align: center;*/
+  /*align-content: center;*/
 }
 
 .postcontent{
@@ -127,7 +127,6 @@ video {
 }
 .home-content h1 {
   font-family: Playfair Display, serif;
-  text-align: center;
   text-transform: uppercase;
   font-size: 85px;
   line-height: 1.1;

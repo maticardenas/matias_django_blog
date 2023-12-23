@@ -15,9 +15,12 @@
         tinymce.init({
             mode: "textareas",
             theme: "silver",
-            plugins: "spellchecker,directionality,paste,searchreplace,lists,link,image,media,emoticons",
+            plugins: "spellchecker,directionality,paste,searchreplace,lists,link,image,media,emoticons,codesample",
             paste_data_images: true,
-            toolbar: "undo redo | styleselect | bold underline italic strikethrough | blockquote | alignleft aligncenter alignright alignjustify | link image media | numlist bullist | emoticons",
+            toolbar: "undo redo | styleselect | bold underline italic strikethrough | blockquote | alignleft aligncenter alignright alignjustify | link image media | numlist bullist | emoticons | codesample | spellchecker",
+            {#selector: 'textarea#codesample',#}
+            select: "textarea",
+            height: 500,
         });
         {#var editor = new MediumEditor(".editable");#}
     </script>

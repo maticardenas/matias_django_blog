@@ -2,9 +2,27 @@
 
 {% block content %}
 
-{#<div>{{ post.title }}</div>#}
+<div class="content-container">{{ post.title }}</div>
 
-<div class="shadow p-3 mb-5 bg-body rounded">{{ post.text|safe|linebreaksbr }}</div>
+{#    <div class="centered-container">#}
+
+<div class="content-container" >{{ post.text|safe }}</div>
+{#    </div>#}
+
+{#    {%  autoescape off %}#}
+{#        <div class="content-container">#}
+{#            {{ post }}#}
+{#        </div>#}
+{#    {% endautoescape %}#}
+{##}
+{##}
+    <style>
+    .content-container {
+        margin: 0 auto;  /* This centers the div on the page. */
+        width: 70%;  /* This sets the width of the div to 80% of the page width. */
+        text-align: left;
+        }
+    </style>
 
     {% if user.is_authenticated %}
         {% if post.published_date %}
@@ -23,9 +41,11 @@
 
     {% endif %}
 <br><br>
+        <div class="centered-container">
          <a class="btn btn-primary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+        </div>
     <br>
-    <div class="container">
+    <div class="container centered-container">
         {% for comment in post.comments.all %}
     <br>
          {% if user.is_authenticated or comment.approved_comment %}
@@ -54,4 +74,22 @@
             <p>No comments</p>
         {% endfor %}
     </div>
+
+
+<style>
+    pre {
+        max-width: 60%; /* Adjust as needed */
+        margin: 0 auto;
+        white-space: pre-wrap; /* Wraps long lines */
+    }
+    {#.centered-container {#}
+    {#    display: flex;#}
+    {#    justify-content: center;#}
+    {#}#}
+    {#.centered-div {#}
+    {#    width: 75%; /* adjust this value as needed */#}
+    {#    text-align: left;#}
+    {#}#}
+</style>
+
 {% endblock %}

@@ -1,3 +1,5 @@
+from rest_framework.request import Request
+
 from blog.forms import CommentForm, PostForm
 from blog.models import Comment, Post
 from django.contrib.auth.decorators import login_required
@@ -5,6 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
+from pathlib import Path
+import mistune
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import html
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -14,6 +21,28 @@ from django.views.generic import (
     UpdateView,
 )
 
+CURRENT_DIR = Path(__file__).resolve().parent
+MD_POSTS = CURRENT_DIR / "md_posts"
+
+
+
+# class HighlightRenderer(mistune.HTMLRenderer):
+#     def block_code(self, code, info=None):
+#         if info:
+#             lexer = get_lexer_by_name(info, stripall=True)
+#             formatter = html.HtmlFormatter()
+#             # return highlight(code, lexer, formatter)
+#             return '<pre><code>' + highlight(code, lexer, formatter) + '</code></pre>'
+#         return '<pre><code>' + mistune.escape(code) + '</code></pre>'
+#     def text(self, text):
+#         return '<pre><code>' + mistune.escape(text) + '</code></pre>'
+#
+# renderer = HighlightRenderer()
+# markdown = mistune.create_markdown(renderer=renderer)
+
+
+class PostDetailView(DetailView):
+    model = Post
 
 class PostListView(ListView):
     model = Post
@@ -22,8 +51,23 @@ class PostListView(ListView):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by("-published_date")
 
 
-class PostDetailView(DetailView):
-    model = Post
+# def post_detail(request: Request, file_name: str) -> "Response":
+#     file = MD_POSTS / f"{file_name}.md"
+#     print(f"MARKDOWN CONTENT:\n\n {file.read_text()}\n\n")
+#
+#     html_content = markdown(file.read_text()).replace('\n', '<br>') #mistune.html(file.read_text())
+#
+#     print(f"HTML CONTENT:\n\n {html_content}\n\n")
+#
+#     return render(request, "blog/post_detail.html", {"post": html_content})
+
+
+# def post_detail(request: Request, pk: int) -> "Response":
+#     post = get_object_or_404(Post, pk=pk)
+#
+#     post_html_content_text = mistune.html(post.text)#markdown(post.text).
+#
+#     return render(request, "blog/post_detail.html", {"post": post_html_content_text})
 
 
 class CreatePostView(CreateView, LoginRequiredMixin):

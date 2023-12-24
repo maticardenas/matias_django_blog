@@ -1,48 +1,63 @@
 {% extends "blog/base.html" %}
-
 {% load static %}
-
 {% block content %}
-
-{#     <div class="home">#}
-{#        <video autoplay loop>#}
-{#          <source src="{% static 'videos/seleccion_final_caricatura.mp4' %}" type="video/mp4" />#}
-{#        </video>#}
-{#        <div class="overlay"></div>#}
-{#        <div class="home-content">#}
-{#          <h1>High-End Kitchen.</h1>#}
-{#          <div class="middle-line"></div>#}
-{#          <button>DISCOVER</button>#}
-{#        </div>#}
-{#      </div>#}
-
-    {#  white text paragraph below #}
-
-{#     <p class="text-yellow h-100 d-flex align-items-center justify-content-center">#}
-{#        Hello! I'm Matías Cárdenas, a software developer from Argentina. I'm currently working as an API Engineer, focusing mostly in API standardization, tooling and development with python.#}
-{#     </p>#}
-
-
-    {#    <p class="h-100 d-flex align-items-center justify-content-center">#}
-        {#          <a href="https://twitter.com/maticardenas_13"><img width="64px" alt="X" title="X" src="{% static 'social_media_logos/twitter.png' %}"/></a>#}
-        {#          &#8287;&#8287;&#8287;&#8287;&#8287;#}
-        {#          <a href="https://github.com/maticardenas" alt="Github" title="Github"><img width="64px" src="{% static 'social_media_logos/github.png' %}"/></a>#}
-        {#          &#8287;&#8287;&#8287;&#8287;&#8287;#}
-        {#          <a href="https://www.linkedin.com/in/mat%C3%ADas-c%C3%A1rdenas/"><img width="64px" alt="LinkedIn" title="LinkedIn" src="{% static 'social_media_logos/linkedin.png' %}"></a>#}
-        {#          &#8287;&#8287;&#8287;&#8287;&#8287;#}
-    {#    </p>#}
-
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="blur-load">
+            <img style="width: 250px;
+                        height: 250px"
+                 loading="lazy"
+                 src="{% static "cartoon_profile_cropped.png" %}">
+        </div>
+    </div>
+    <br>
     <p class="h-100 d-flex align-items-center justify-content-center">
-          <a href="https://twitter.com/maticardenas_13"><img width="64px" alt="X" title="X" src="{% static 'social_media_logos/twitter.png' %}"/></a>
-          &#8287;&#8287;&#8287;&#8287;&#8287;
-          <a href="https://github.com/maticardenas" alt="Github" title="Github"><img width="64px" src="{% static 'social_media_logos/github.png' %}"/></a>
-          &#8287;&#8287;&#8287;&#8287;&#8287;
-          <a href="https://www.linkedin.com/in/mat%C3%ADas-c%C3%A1rdenas/"><img width="64px" alt="LinkedIn" title="LinkedIn" src="{% static 'social_media_logos/linkedin.png' %}"></a>
-          &#8287;&#8287;&#8287;&#8287;&#8287;
+        <a href="https://twitter.com/maticardenas_13">
+            <img width="64px"
+                 alt="X"
+                 title="X"
+                 src="{% static 'social_media_logos/twitter.png' %}" />
+        </a>
+        &#8287;&#8287;&#8287;&#8287;&#8287;
+        <a href="https://github.com/maticardenas" alt="Github" title="Github">
+            <img width="64px" src="{% static 'social_media_logos/github.png' %}" />
+        </a>
+        &#8287;&#8287;&#8287;&#8287;&#8287;
+        <a href="https://www.linkedin.com/in/mat%C3%ADas-c%C3%A1rdenas/">
+            <img width="64px"
+                 alt="LinkedIn"
+                 title="LinkedIn"
+                 src="{% static 'social_media_logos/linkedin.png' %}">
+        </a>
+        &#8287;&#8287;&#8287;&#8287;&#8287;
     </p>
-    {# paragraph with text in white color  #}
-{#    <p class="text-yellow h-100 d-flex align-items-center justify-content-center">#}
-{#        <span>Hi, I'm Matías Cárdenas, a software developer from Argentina. I'm currently working as an API Engineer, focusing mostly in API standardization, tooling and development with python.</span>#}
-{#    </p>#}
+    <style>
+        img{
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: block;
+            object-position: center;
+            object-fit: cover;
+        }
 
+        .blur-load {
+            position: relative;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url({% static "profile_small.png"%});
+        }
+    </style>
+    <script>
+        const blurDivs = document.querySelectorAll(".blur-load");
+        blurDivs.forEach((div) => {
+            const img = div.querySelector("img");
+            function loaded() {
+               div.classList.add("loaded");
+            }
+            if (img.complete){
+                loaded();
+            } else {
+                img.addEventListener("load", loaded);
+            }
+        });
+    </script>
 {% endblock %}

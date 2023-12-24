@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Quiz</title>
-</head>
-<body>
-    <h1>{{ question.text }}</h1>
-
-    {% if question.image %}
-        <img src="{{ question.image.url }}" alt="Question Image">
-    {% endif %}
-
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-</body>
+    <head>
+        <title>Quiz</title>
+    </head>
+    <body>
+        <h1>{{ question.text }}</h1>
+        {% if question.image %}<img src="{{ question.image.url }}" alt="Question Image">{% endif %}
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
 </html>

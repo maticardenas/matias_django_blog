@@ -1,16 +1,11 @@
 {% extends "blog/base.html" %}
-
-
 {% block content %}
     <h1>Post</h1>
-
     <form class="post-form" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-
         <button type="submit" class="save btn btn-primary">Save</button>
     </form>
-
     <script>
         tinymce.init({
             mode: "textareas",
@@ -24,4 +19,5 @@
         });
         {#var editor = new MediumEditor(".editable");#}
     </script>
-{% endblock %}`
+{% endblock %}
+`

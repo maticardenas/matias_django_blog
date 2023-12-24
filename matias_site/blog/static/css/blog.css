@@ -1,10 +1,10 @@
-h1{
-  font-family: Oak,sans-serif;
-  color: rgba(0,0,0,0.7);
-  position:relative;
-  top:calc(50% - 80px);
-  left:calc(50% - 130px);
-}
+/*h1{*/
+/*  font-family: Oak,sans-serif;*/
+/*  color: rgba(0,0,0,0.7);*/
+/*  position:relative;*/
+/*  top:calc(50% - 80px);*/
+/*  left:calc(50% - 130px);*/
+/*}*/
 
 .techfont{
   font-family: "Didact Gothic";
@@ -15,6 +15,18 @@ h1{
 .bigbrand{
   font-size: 1.5em;
 }
+
+pre {
+        max-width: 70%; /* Adjust as needed */
+        margin: 0 auto;
+        white-space: pre-wrap; /* Wraps long lines */
+    }
+
+.content-container {
+    margin: 0 auto;  /* This centers the div on the page. */
+    width: 70%;  /* This sets the width of the div to 80% of the page width. */
+    text-align: left;
+    }
 
 .loader {
   position:fixed;
@@ -147,4 +159,39 @@ video {
   margin: 50px auto 0;
   padding: 16px 30px;
   cursor: pointer;
+}
+ .blur-load.loaded::before {
+    content: none;
+}
+.blur-load.loaded {
+    background-image: none;
+}
+
+.blur-load.loaded > img {
+    opacity: 1;
+}
+
+.blur-load > img {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background-image: none;
+}
+.blur-load::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    animation: pulse 2.5s infinite;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
 }

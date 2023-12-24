@@ -4,29 +4,12 @@
 
 <div class="content-container">{{ post.title }}</div>
 
-{#    <div class="centered-container">#}
-
 <div class="content-container" >{{ post.text|safe }}</div>
-{#    </div>#}
-
-{#    {%  autoescape off %}#}
-{#        <div class="content-container">#}
-{#            {{ post }}#}
-{#        </div>#}
-{#    {% endautoescape %}#}
-{##}
-{##}
-    <style>
-    .content-container {
-        margin: 0 auto;  /* This centers the div on the page. */
-        width: 70%;  /* This sets the width of the div to 80% of the page width. */
-        text-align: left;
-        }
-    </style>
 
     {% if user.is_authenticated %}
+        <div class="content-container">
         {% if post.published_date %}
-        <div class="date postdate centerstage">
+        <div class="date postdate centerstage content-container">
              {{ post.published_date }}
         </div>
         {% else %}
@@ -38,20 +21,21 @@
         <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M6.5 1.75a.25.25 0 01.25-.25h2.5a.25.25 0 01.25.25V3h-3V1.75zm4.5 0V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6z"></path></svg>
         </a>
+        </div>
 
     {% endif %}
 <br><br>
-        <div class="centered-container">
+        <div class="content-container">
          <a class="btn btn-primary" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
         </div>
     <br>
-    <div class="container centered-container">
+    <div class="container content-container">
         {% for comment in post.comments.all %}
     <br>
          {% if user.is_authenticated or comment.approved_comment %}
             {{ comment.created_date }}
-             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                  <div class="card-header">
+             <div class="card text-dark bg-light mb-3 content-container" style="max-width: 18rem;">
+                  <div class="card-header content-container">
                       {{ comment.author }}
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                       <a class="btn btn-primary align-right" href="{% url 'remove_comment' pk=comment.pk %}">
@@ -78,18 +62,15 @@
 
 <style>
     pre {
-        max-width: 60%; /* Adjust as needed */
+        max-width: 70%; /* Adjust as needed */
         margin: 0 auto;
         white-space: pre-wrap; /* Wraps long lines */
     }
-    {#.centered-container {#}
-    {#    display: flex;#}
-    {#    justify-content: center;#}
-    {#}#}
-    {#.centered-div {#}
-    {#    width: 75%; /* adjust this value as needed */#}
-    {#    text-align: left;#}
-    {#}#}
+    .content-container {
+        margin: 0 auto;  /* This centers the div on the page. */
+        width: 70%;  /* This sets the width of the div to 80% of the page width. */
+        text-align: left;
+        }
 </style>
 
 {% endblock %}

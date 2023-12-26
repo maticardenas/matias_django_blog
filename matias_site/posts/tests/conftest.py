@@ -6,13 +6,11 @@ from django.contrib.auth import get_user_model
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "matias_site.settings")
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable
+from typing import Callable
 
 import pytest
+from django.contrib.auth.models import User
 from openapi_tester import SchemaTester
-
-if TYPE_CHECKING:
-    from rest_framework.authtoken.admin import User
 
 CURRENT_PATH = Path().absolute()
 
@@ -20,7 +18,7 @@ CURRENT_PATH = Path().absolute()
 @pytest.fixture
 def schema_tester_factory() -> Callable:
     def schema_tester(schema_file: Path) -> SchemaTester:
-        return SchemaTester(schema_file_path=schema_file)
+        return SchemaTester(schema_file_path=str(schema_file))
 
     return schema_tester
 
@@ -41,7 +39,7 @@ def user():
 
 
 @pytest.fixture
-def post(user: "User"):
+def post(user: User):
     from blog.models import Post
 
     Post.objects.create(

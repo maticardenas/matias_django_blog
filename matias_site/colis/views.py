@@ -9,7 +9,7 @@ from rest_framework.request import Request
 # Create your views here.
 
 
-def quiz(request: Request, question_number: int = 1) -> HTTPResponse:
+def quiz(request: Request, question_number: int = 1):
     question = Question.objects.get(pk=question_number)
     if request.method == "POST":
         form = AnswerForm(request.POST)

@@ -25,6 +25,10 @@ mistune = "^3.0.2"
 pygments = "^2.17.2"
 djlint = "^1.34.1"
 pre-commit = "^3.6.0"
+mypy = "^1.8.0"
+django-stubs = "^4.2.7"
+djangorestframework-stubs = "^3.14.5"
+types-pygments = "^2.17.0.0"
 
 [tool.poetry.dev-dependencies]
 
@@ -39,4 +43,12 @@ profile = "black"
 line-length = 120
 
 [tool.djlint]
-profile="django"
+profile = "django"
+
+[tool.mypy]
+mypy_path = "matias_site/"
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+exclude = ["venv/", "build/", "matias_site/colis"]
+
+[tool.django-stubs]
+django_settings_module = "matias_site.settings"

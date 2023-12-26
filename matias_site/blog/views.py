@@ -1,10 +1,10 @@
 from pathlib import Path
 
-import mistune
 from blog.forms import CommentForm, PostForm
 from blog.models import Comment, Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -13,12 +13,8 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     ListView,
-    TemplateView,
     UpdateView,
 )
-from pygments import highlight
-from pygments.formatters import html
-from pygments.lexers import get_lexer_by_name
 from rest_framework.request import Request
 
 CURRENT_DIR = Path(__file__).resolve().parent
@@ -51,7 +47,7 @@ class PostListView(ListView):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by("-published_date")
 
 
-# def post_detail(request: Request, file_name: str) -> "Response":
+# def post_detail(request: Request, file_name: str) -> HttpResponse:
 #     file = MD_POSTS / f"{file_name}.md"
 #     print(f"MARKDOWN CONTENT:\n\n {file.read_text()}\n\n")
 #
@@ -62,7 +58,7 @@ class PostListView(ListView):
 #     return render(request, "blog/post_detail.html", {"post": html_content})
 
 
-# def post_detail(request: Request, pk: int) -> "Response":
+# def post_detail(request: Request, pk: int) -> HttpResponse:
 #     post = get_object_or_404(Post, pk=pk)
 #
 #     post_html_content_text = mistune.html(post.text)#markdown(post.text).
@@ -84,7 +80,7 @@ class PostUpdateView(UpdateView, LoginRequiredMixin):
     model = Post
 
 
-class PostDeleteView(DeleteView, LoginRequiredMixin):
+class PostDeleteView(DeleteView, LoginRequiredMixin):  # type: ignore[misc]
     login_url = "/login/"
     success_url = reverse_lazy("post_list")
     model = Post
@@ -103,7 +99,7 @@ class DraftListView(ListView, LoginRequiredMixin):
 
 
 @login_required
-def add_comment_to_post(request: "Request", pk: int) -> "Response":
+def add_comment_to_post(request: "Request", pk: int) -> HttpResponse:
     post = get_object_or_404(Post, pk=pk)
 
     if request.method == "POST":
@@ -122,7 +118,7 @@ def add_comment_to_post(request: "Request", pk: int) -> "Response":
 
 
 @login_required
-def approve_comment(request: "Request", pk: int) -> "Response":
+def approve_comment(request: "Request", pk: int) -> HttpResponse:
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
 
@@ -130,7 +126,7 @@ def approve_comment(request: "Request", pk: int) -> "Response":
 
 
 @login_required
-def remove_comment(request: "Request", pk: int) -> "Response":
+def remove_comment(request: "Request", pk: int) -> HttpResponse:
     comment = get_object_or_404(Comment, pk=pk)
     post_pk = comment.post.pk
     comment.delete()
@@ -139,7 +135,7 @@ def remove_comment(request: "Request", pk: int) -> "Response":
 
 
 @login_required
-def publish_post(request: "Request", pk: int) -> "Response":
+def publish_post(request: "Request", pk: int) -> HttpResponse:
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect("post_detail", pk=post.pk)

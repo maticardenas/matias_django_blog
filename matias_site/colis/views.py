@@ -13,7 +13,6 @@ from colis.models import Question, Choice
 
 def quiz(request: Request, question_number: int = 1) -> HTTPResponse:
     question = Question.objects.get(pk=question_number)
-
     if request.method == "POST":
         form = AnswerForm(request.POST)
         if form.is_valid():

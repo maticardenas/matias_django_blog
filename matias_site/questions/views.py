@@ -15,8 +15,8 @@ IMAGES_DIR = CURRENT_DIR / "images"
 # Create your views here.
 
 CODES = {
-    "Kun": "5656", #
-    "David": "3232", #
+    "Kun": "5656",  #
+    "David": "3232",  #
     "Pollo": "4444",
     "Pipi": "6262",
     "Ulises": "7171",
@@ -34,8 +34,8 @@ CODE_ANSWERS = {
 
 
 CODE_IMAGES = {
-    "Kun": "kun_question.png", #
-    "David": "david_question.png", #
+    "Kun": "kun_question.png",  #
+    "David": "david_question.png",  #
     "Pollo": "pollo_question.png",
     "Pipi": "pipi_question.png",
     "Ulises": "ulises_question.png",
@@ -43,23 +43,22 @@ CODE_IMAGES = {
 }
 
 ANSWERS = {
-    "Kun": 2, # Palermo + Enzo
-    "David": 12, # Messi + Penaldo - Klose
-    "Pollo": 31, # Ronald + Klose - Garce
+    "Kun": 2,  # Palermo + Enzo
+    "David": 12,  # Messi + Penaldo - Klose
+    "Pollo": 31,  # Ronald + Klose - Garce
     "Pipi": "marcos",
     "Ulises": "marcos",
     "Pela": "marcos",
 }
 
 IMAGES = {
-    "Kun": "kun_answer.png", #
-    "David": "david_answer.png", #
+    "Kun": "kun_answer.png",  #
+    "David": "david_answer.png",  #
     "Pollo": "pollo_answer.png",
     "Pipi": "pipi_answer.png",
     "Ulises": "ulises_answer.png",
     "Pela": "pela_answer.png",
 }
-
 
 
 def index(request):
@@ -76,17 +75,18 @@ class CodeView(generics.CreateAPIView):
 
         if int(data["answer"]) == int(CODE_ANSWERS[data["name"]]):
             image = CODE_IMAGES[data["name"]]
-            file_handle = open(IMAGES_DIR / image, 'rb')
-            response = FileResponse(file_handle, content_type='image/jpeg')
+            file_handle = open(IMAGES_DIR / image, "rb")
+            response = FileResponse(file_handle, content_type="image/jpeg")
 
             return response
         else:
-            return HttpResponse(f"Respuesta incorrecta para {data['name']}. Fijate bien cuando hablamos!", status=400, content_type="")
+            return HttpResponse(
+                f"Respuesta incorrecta para {data['name']}. Fijate bien cuando hablamos!", status=400, content_type=""
+            )
 
 
 class QuestionView(generics.CreateAPIView):
     serializer_class = QuestionSerializer
-
 
     def check_answer(self, data):
         if data["name"] in ["Pipi", "Ulises"]:
@@ -95,6 +95,7 @@ class QuestionView(generics.CreateAPIView):
             return data["answer"].lower() in ["krkic", "krkić"]
         else:
             return int(data["answer"]) == int(ANSWERS[data["name"]])
+
     def create(self, requests, *args, **kwargs):
         serializer = self.get_serializer(data=requests.data)
         serializer.is_valid(raise_exception=True)
@@ -108,9 +109,8 @@ class QuestionView(generics.CreateAPIView):
 
         image = IMAGES[data["name"]]
 
-        file_handle = open(IMAGES_DIR / image, 'rb')
-        response = FileResponse(file_handle, content_type='image/jpeg')
+        file_handle = open(IMAGES_DIR / image, "rb")
+        response = FileResponse(file_handle, content_type="image/jpeg")
         # response['Content-Disposition'] = f'attachment; filename="{image}"'
 
         return response
-

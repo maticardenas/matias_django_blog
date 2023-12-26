@@ -3,6 +3,16 @@ repos:
       hooks:
         - id: black
           name: black
-          entry: poetry run python -m black .
+          entry: poetry run python -m black --check .
           language: system
           types: [python]
+        - id: isort
+          name: isort
+          entry: poetry run python -m isort --check-only  .
+          language: system
+          types: [ python ]
+        - id: djlint
+          name: djlint
+          entry: poetry run python -m djlint . --check
+          language: system
+          types: [ python ]

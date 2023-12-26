@@ -26,5 +26,4 @@ urlpatterns = [
     re_path("^tinymce/", include("tinymce.urls")),
     re_path("^api/posts/", include("posts.urls"), name="posts_api"),
     re_path("^colis/", include("questions.urls"), name="questions_api"),
-
 ]

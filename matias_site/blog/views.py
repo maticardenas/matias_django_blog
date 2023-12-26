@@ -25,7 +25,6 @@ CURRENT_DIR = Path(__file__).resolve().parent
 MD_POSTS = CURRENT_DIR / "md_posts"
 
 
-
 # class HighlightRenderer(mistune.HTMLRenderer):
 #     def block_code(self, code, info=None):
 #         if info:
@@ -43,6 +42,7 @@ MD_POSTS = CURRENT_DIR / "md_posts"
 
 class PostDetailView(DetailView):
     model = Post
+
 
 class PostListView(ListView):
     model = Post

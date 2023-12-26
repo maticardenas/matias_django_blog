@@ -4,5 +4,5 @@ from colis.views import quiz
 
 
 urlpatterns = [
-    path("quiz/<int:quiz_id>/<int:question_id>/", quiz, name='quiz'),
+    path("quiz/<int:quiz_id>/<int:question_id>/", quiz, name="quiz"),
 ]

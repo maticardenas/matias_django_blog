@@ -17,7 +17,7 @@
 }
 
 pre {
-        max-width: 70%; /* Adjust as needed */
+        max-width: 90%; /* Adjust as needed */
         margin: 0 auto;
         white-space: pre-wrap; /* Wraps long lines */
     }

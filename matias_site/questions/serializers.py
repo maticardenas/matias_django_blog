@@ -1,7 +1,5 @@
+from questions.models import Names, Question
 from rest_framework import serializers
-from questions.models import Question
-
-from questions.models import Names
 
 
 class QuestionSerializer(serializers.ModelSerializer):

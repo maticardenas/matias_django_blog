@@ -1,6 +1,6 @@
-from posts.serializers import PostListSerializer, PostSerializer
 from blog.models import Post
 from django.shortcuts import render
+from posts.serializers import PostListSerializer, PostSerializer
 
 # Create your views here.
 from rest_framework import views, viewsets

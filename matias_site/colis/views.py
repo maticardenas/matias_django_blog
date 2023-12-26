@@ -1,12 +1,10 @@
 from http.client import HTTPResponse
 
-from django.shortcuts import render, redirect
+from colis.forms import AnswerForm
+from colis.models import Choice, Question
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from rest_framework.request import Request
-
-from colis.forms import AnswerForm
-from colis.models import Question, Choice
-
 
 # Create your views here.
 

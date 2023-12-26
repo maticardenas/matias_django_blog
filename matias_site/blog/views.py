@@ -1,5 +1,6 @@
-from rest_framework.request import Request
+from pathlib import Path
 
+import mistune
 from blog.forms import CommentForm, PostForm
 from blog.models import Comment, Post
 from django.contrib.auth.decorators import login_required
@@ -7,11 +8,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from pathlib import Path
-import mistune
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters import html
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -20,6 +16,10 @@ from django.views.generic import (
     TemplateView,
     UpdateView,
 )
+from pygments import highlight
+from pygments.formatters import html
+from pygments.lexers import get_lexer_by_name
+from rest_framework.request import Request
 
 CURRENT_DIR = Path(__file__).resolve().parent
 MD_POSTS = CURRENT_DIR / "md_posts"

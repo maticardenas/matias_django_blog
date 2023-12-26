@@ -1,5 +1,5 @@
-from posts.views import PostViewSet
 from django.urls import include, path
+from posts.views import PostViewSet
 from rest_framework import routers
 
 router = routers.DefaultRouter()

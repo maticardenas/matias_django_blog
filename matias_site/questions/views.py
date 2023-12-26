@@ -1,12 +1,10 @@
 import json
-
-from django.http import HttpResponse, FileResponse
-from django.shortcuts import render
-from rest_framework import generics
-
-from questions.serializers import QuestionSerializer, CodeSerializer
 from pathlib import Path
 
+from django.http import FileResponse, HttpResponse
+from django.shortcuts import render
+from questions.serializers import CodeSerializer, QuestionSerializer
+from rest_framework import generics
 from rest_framework.response import Response
 
 CURRENT_DIR = Path(__file__).resolve().parent

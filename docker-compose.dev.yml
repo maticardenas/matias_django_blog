@@ -3,6 +3,8 @@ version: "3.9"
 services:
   matias_site:
     build: .
+    env_file:
+      - .env
     ports:
       - "8888:8888"
     command: bash -c 'while !</dev/tcp/matias_site_db/5434; do sleep 1; done; ./start_dev_server.sh'

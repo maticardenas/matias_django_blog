@@ -23,7 +23,10 @@ QUESTIONS_TEMPLATES_DIR = BASE_DIR / "questions" / "templates"
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-m3!e6(9mt3f214uky$xl*etyg8x#h-(s*-c9+fq(*f6prwe&uw"
+try:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+except KeyError as e:
+    raise RuntimeError("Could not find a SECRET_KEY in environment")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

@@ -1,0 +1,19 @@
+name: matias-site-test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: matias_site_env
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: docker-compose -f docker-compose.test.yml run matias_site sh -c "poetry run python -m pytest -s -vv ."

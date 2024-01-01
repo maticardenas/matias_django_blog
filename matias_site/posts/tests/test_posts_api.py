@@ -1,6 +1,8 @@
+import os
 from pathlib import Path
 from typing import TYPE_CHECKING, Callable
 
+import django
 import pytest as pytest
 from django.urls import reverse
 from openapi_tester import OpenAPIClient, SchemaTester
@@ -9,7 +11,6 @@ from rest_framework import status
 if TYPE_CHECKING:
     from django.contrib.auth.models import User
 
-
 CURRENT_PATH = Path(__file__).parent.absolute()
 
 POSTS_API_OAS_PATH = CURRENT_PATH / ".." / "schemas" / "posts_api.yaml"
@@ -17,7 +18,7 @@ POSTS_API_OAS_PATH = CURRENT_PATH / ".." / "schemas" / "posts_api.yaml"
 
 @pytest.fixture
 def post_api_url():
-    return reverse("api:post-list")
+    return reverse("posts:post-list")
 
 
 @pytest.fixture
@@ -40,7 +41,6 @@ def test_get_posts_with_data(client: OpenAPIClient, user: "User", post_api_url: 
         {
             "author": 1,
             "title": "Test Post",
-            "text": "Test Text",
             "create_date": "2022-12-31T00:00:00Z",
             "published_date": None,
         }

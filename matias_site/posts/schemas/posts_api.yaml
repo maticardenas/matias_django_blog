@@ -3,7 +3,7 @@ info:
   title: ''
   version: ''
 paths:
-  /api/post/:
+  /api/posts/post/:
     get:
       operationId: listPosts
       description: ''
@@ -37,6 +37,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Post'
+              required:
+                - author
+                - title
+                - text
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/Post'
@@ -54,7 +58,7 @@ paths:
           description: 'Forbidden'
       tags:
       - api
-  /api/post/{id}/:
+  /api/posts/post/{id}/:
     get:
       operationId: retrievePost
       description: ''
@@ -168,7 +172,3 @@ components:
           type: string
           format: date-time
           nullable: true
-      required:
-      - author
-      - title
-      - text

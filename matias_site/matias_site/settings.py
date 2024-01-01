@@ -62,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "csp.middleware.CSPMiddleware",
 ]
 
 ROOT_URLCONF = "matias_site.urls"
@@ -164,7 +165,50 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
 
-SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_SECONDS = 2_592_000
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+
+# Content-Security-Policy
+CSP_STYLE_SRC = [
+    "'unsafe-eval'",
+    "'unsafe-inline'",
+    "'self'",
+    "cdn.jsdelivr.net",
+    "cdnjs.cloudflare.com",
+    "fonts.googleapis.com",
+    "https://ajax.googleapis.com",
+    "cdn.jsdelivr.net",
+    "www.w3.org",
+    "data:",
+    "stackpath.bootstrapcdn.com",
+    "fonts.gstatic.com",
+]
+
+CSP_SCRIPT_SRC_ELEM = [
+    "'self'",
+    "'unsafe-inline'",
+    "ajax.googleapis.com",
+    "cdn.jsdelivr.net",
+    "stackpath.bootstrapcdn.com",
+    "cdnjs.cloudflare.com",
+]
+
+CSP_FONT_SRC = [
+    "'self'",
+    "fonts.gstatic.com",
+]
+
+CSP_IMG_SRC = ["'self'", "data:"]
+
+CSP_SCRIPT_SRC = [
+    "'self'",
+    "'unsafe-inline'",
+    "cdn.jsdelivr.net",
+    "cdnjs.cloudflare.com",
+    "ajax.googleapis.com" "stackpath.bootstrapcdn.com",
+    "fonts.gstatic.com",
+]

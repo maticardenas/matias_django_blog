@@ -10,7 +10,7 @@ workers = multiprocessing.cpu_count() * 2 + 1
 # # The socket to bind
 bind = "0.0.0.0:8888"
 # # Restart workers when code changes (development only!)
-reload = False
+reload = True
 # # Write access and error info to /var/log
 # accesslog = errorlog = "/var/log/gunicorn/dev.log"
 # # Redirect stdout/stderr to log file
